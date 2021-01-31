@@ -11,7 +11,7 @@ const initialPost = {
 	title: '',
 	message: '',
 	tags: '',
-	selectedFile: '',
+	selectedFile: null,
 };
 
 const Form = ({ currentId, setCurrentId }) => {
@@ -41,8 +41,7 @@ const Form = ({ currentId, setCurrentId }) => {
 		setCurrentId(null);
 	};
 
-	const canSubmit =
-		postData.creator && postData.message && postData.selectedFile;
+	const canSubmit = postData.creator && postData.title && postData.selectedFile;
 
 	return (
 		<Paper className={classes.paper}>
@@ -52,7 +51,9 @@ const Form = ({ currentId, setCurrentId }) => {
 				className={`${classes.root} ${classes.form}`}
 				onSubmit={handleSubmit}
 			>
-				<Typography variant='h6'>Creating a Memory</Typography>
+				<Typography variant='h6'>
+					{currentId ? 'Editing' : 'Creating'} a Memory
+				</Typography>
 				{/* Creator */}
 				<TextField
 					name='creator'
@@ -91,7 +92,9 @@ const Form = ({ currentId, setCurrentId }) => {
 					label='Tags'
 					fullWidth
 					value={postData.tags}
-					onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+					onChange={(e) =>
+						setPostData({ ...postData, tags: e.target.value.split(',') })
+					}
 				/>
 				{/* File */}
 				<div className={classes.fileInput}>

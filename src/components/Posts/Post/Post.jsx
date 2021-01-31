@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import {
 	Card,
 	CardActions,
@@ -15,9 +16,11 @@ import {
 import moment from 'moment';
 
 import useStyles from './styles';
+import { deletePost, likePost } from '../../../actions/posts';
 
 const Post = ({ post, setCurrentId }) => {
 	const classes = useStyles();
+	const dispatch = useDispatch();
 	const {
 		_id,
 		creator,
@@ -28,11 +31,6 @@ const Post = ({ post, setCurrentId }) => {
 		createdAt,
 		likeCount,
 	} = post;
-
-	const tagsText = tags[0]
-		.split(' ')
-		.map((t) => `#${t}`)
-		.join(' ');
 
 	return (
 		<Card className={classes.card}>
@@ -59,22 +57,43 @@ const Post = ({ post, setCurrentId }) => {
 			{/* Details */}
 			<div className={classes.details}>
 				<Typography variant='body2' color='textSecondary'>
-					{tagsText}
+					{tags.map((tag) => `#${tag.trim()} `)}
 				</Typography>
 			</div>
 
 			{/* Content */}
 			<CardContent>
 				<Typography className={classes.title} variant='h5' gutterBottom>
+					{title}
+				</Typography>
+				<Typography
+					className={classes.title}
+					variant='body2'
+					color='textSecondary'
+					component='p'
+				>
 					{message}
 				</Typography>
 			</CardContent>
 
 			<CardActions className={classes.cardActions}>
-				<Button size='small' color='primary' onClick={() => {}}>
-					<ThumbUpAltIcon fontSize='small' /> Like {likeCount}
+				<Button
+					size='small'
+					color='primary'
+					onClick={() => {
+						dispatch(likePost(_id));
+					}}
+				>
+					<ThumbUpAltIcon fontSize='small' />
+					&nbsp;Like&nbsp;{likeCount}
 				</Button>
-				<Button size='small' color='primary' onClick={() => {}}>
+				<Button
+					size='small'
+					color='primary'
+					onClick={() => {
+						dispatch(deletePost(_id));
+					}}
+				>
 					<DeleteIcon fontSize='small' /> Delete
 				</Button>
 			</CardActions>

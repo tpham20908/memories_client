@@ -12,6 +12,11 @@ const useStyles = makeStyles((theme) => ({
 	heading: {
 		color: 'rgba(0,183,255, 1)',
 	},
+	container: {
+		[theme.breakpoints.down('sm')]: {
+			flexDirection: 'column-reverse',
+		},
+	},
 	image: {
 		marginLeft: '15px',
 	},
