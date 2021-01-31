@@ -1,6 +1,16 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
+	mainContainer: {
+		position: 'relative',
+		'&:after': {
+			content: '"Tung Pham - 2021"',
+			position: 'absolute',
+			bottom: -22,
+			right: 0,
+			color: '#aaa',
+		},
+	},
 	appBar: {
 		borderRadius: 15,
 		margin: '30px 0',

@@ -18,7 +18,7 @@ export default function App() {
 	}, [currentId, dispatch]);
 
 	return (
-		<Container maxWidth='lg'>
+		<Container maxWidth='lg' className={classes.mainContainer}>
 			<AppBar position='static' color='inherit' className={classes.appBar}>
 				<Typography variant='h2' align='center' className={classes.heading}>
 					Memories
