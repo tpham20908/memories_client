@@ -36,7 +36,7 @@ export default function App() {
 						className={classes.container}
 						container
 						justify='space-between'
-						alignItems='center'
+						alignItems='flex-start'
 						spacing={3}
 					>
 						<Grid item xs={12} md={7}>
